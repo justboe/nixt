@@ -14,5 +14,6 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitOverride": true,
     "noEmit": true
-  }
+  },
+  
 }

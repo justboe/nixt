@@ -1,19 +1,20 @@
 {
-  "name": "packageName",
+  "name": "@nixtjs/nixt",
   "version": "0.0.0",
-  "description": "",
-  "repository": "unjs/packageName",
+  "description": "improved Svelte development",
+  "repository": "nixtjs/nixt",
   "license": "MIT",
   "sideEffects": false,
   "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.mjs"
     }
   },
-  "main": "./dist/index.cjs",
+  "bin": {
+    "nixi": "./dist/cli.mjs"
+  },
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
@@ -21,27 +22,37 @@
   ],
   "scripts": {
     "build": "unbuild",
+    "build:play": "pnpx nodemon --watch src --ext ts,svelte --exec \"pnpm build && pnpm play\"",
     "dev": "vitest dev",
     "lint": "eslint . && prettier -c .",
     "lint:fix": "automd && eslint . --fix && prettier -w .",
     "prepack": "pnpm build",
-    "play": "jiti playground",
+    "play": "node ./dist/cli.mjs dev playground",
     "release": "pnpm test && changelogen --release && npm publish && git push --follow-tags",
     "test": "pnpm lint && pnpm test:types && vitest run --coverage",
     "test:types": "tsc --noEmit --skipLibCheck"
   },
   "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "@types/node": "^22.10.2",
     "@vitest/coverage-v8": "^2.1.8",
     "automd": "^0.3.12",
     "changelogen": "^0.5.7",
+    "citty": "^0.1.6",
     "eslint": "^9.17.0",
     "eslint-config-unjs": "^0.4.2",
     "jiti": "^2.4.2",
     "prettier": "^3.4.2",
+    "rollup-plugin-svelte": "^7.2.2",
+    "rou3": "^0.5.1",
     "typescript": "^5.7.2",
     "unbuild": "^3.0.1",
     "vitest": "^2.1.8"
   },
-  "packageManager": "pnpm@9.15.1"
+  "packageManager": "pnpm@9.15.1",
+  "dependencies": {
+    "glob": "^11.0.1",
+    "svelte": "^5.19.0",
+    "vite": "^6.0.10"
+  }
 }
